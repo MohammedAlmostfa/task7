@@ -1,5 +1,52 @@
 
 
+.market-container {
+  margin-top: 100px;
+  margin-bottom: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 100px; /* قللت المسافة لتكون مناسبة */
+  padding: 0 50px;
+}
+
+.market-data {
+  max-width: 600px;
+}
+
+.market-title {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+.section-heading {
+  font-size: 1.5rem;
+  color: #34495e;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.section-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.image-section img {
+
+  
+  min-width: 30vw;
+  width: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+
+
+
 /* ==================== Search & Filter Section ==================== */
 .search-filter {
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
@@ -181,6 +228,12 @@ right: 10%;
 }
 
 @media (max-width: 768px) {
+  .market-container {
+    flex-direction: column;
+  }
+  .image-section {
+    margin: 0px auto;
+  }
   .container {
     padding: 20px;
   }
@@ -235,4 +288,30 @@ right: 10%;
   color: #7f8c8d;
   text-align: center;
   font-weight: 600;
+}
+.footer {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  margin-top: 50px;
+}
+
+.footer-links a {
+  color: #ffd700;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+.footer-contact p {
+  margin: 5px 0;
+}
+
+.footer-social img {
+  width: 24px;
+  margin: 0 5px;
 }
