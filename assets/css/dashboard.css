@@ -1,0 +1,206 @@
+
+.statistics {
+  margin: 0 auto;
+width: 50%;
+height: 150px;
+  background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+margin-bottom: 30px;
+  border-radius: 10px;
+}
+
+.product-count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center; 
+  height: 100%;
+}
+
+/* ==================== Form Section ==================== */
+.add-product-form {
+  margin-bottom: 40px;
+}
+
+.add-product-form form {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  border: none !important;
+  border-radius: 15px;
+  padding: 30px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.add-product-form form:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* ==================== Form Elements ==================== */
+.modal-body label,
+.add-product-form label {
+  font-weight: 600 !important;
+  color: #2c3e50 !important;
+  margin-bottom: 8px !important;
+  margin-top: 15px !important;
+  display: block !important;
+  font-size: 14px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+}
+
+.add-product-form .form-control,
+.modal-body .form-control,
+.add-product-form .form-select {
+  border: 2px solid #e0e0e0 !important;
+  border-radius: 10px !important;
+  padding: 12px 15px !important;
+  font-size: 15px !important;
+  transition: all 0.3s ease !important; 
+  background: white !important;
+}
+
+.add-product-form .form-control:focus,
+.modal-body .form-control:focus,
+.add-product-form .form-select:focus {
+  border-color: #667eea !important;
+  box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25) !important;
+  outline: none !important;
+}
+.category-section{
+  display: flex   ;
+  gap: 20%;
+  height:50px ;
+}
+.add-product-form .btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  padding: 12px 40px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 20px;
+}
+
+.add-product-form .btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+}
+.addbtn{
+
+  width: 30% !important ;
+  padding-bottom: 20px !important;
+}
+
+/* ==================== Table Section ==================== */
+.table {
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  background: white;
+   box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+
+}
+
+.table thead {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+
+.table thead th {
+  padding: 20px !important;
+  
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 14px;
+  border: none !important;
+}
+
+.table tbody tr {
+  transition: all 0.3s ease;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+
+.table tbody td,
+.table tbody th {
+  padding: 18px !important;
+  font-size: 15px;
+  color: #2c3e50;
+}
+
+/* ==================== Action Buttons ==================== */
+.btn-warning {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  margin-right: 8px;
+  color: white;
+}
+
+.btn-warning:hover {
+  transform: translateY(-2px);
+  color: white;
+}
+
+.btn-danger {
+  background:  linear-gradient(135deg, #ea6666 0%, #a24b4b 100%) !important;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.btn-danger:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(250, 112, 154, 0.4);
+}
+
+/* ==================== Responsive Design ==================== */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+.category-section{
+ flex-direction: column; 
+}  .add-product-form form {
+    padding: 20px !important;
+  }
+
+  .table {
+    font-size: 13px;
+  }
+
+  .table thead th,
+  .table tbody td {
+    padding: 12px !important;
+  }
+
+  .btn-warning,
+  .btn-danger {
+    padding: 6px 12px;
+    font-size: 13px;
+    margin-bottom: 5px;
+  }
+}
+
+/* ==================== Animations ==================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.container {
+  animation: fadeIn 0.6s ease;
+}
+
