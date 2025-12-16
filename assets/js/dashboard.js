@@ -1,40 +1,71 @@
-// Select DOM elements
+// ===============================
+// Product Management Application
+// ===============================
+// This script allows users to:
+// - Add, edit, and delete products
+// - Categorize products
+// - Persist data using localStorage
+// - Render products dynamically in a table
+// ===============================
+
+
+// -------------------------------
+// DOM Element Selection
+// -------------------------------
 const form = document.querySelector('form'); // Main product form
-const ProductNameInput = document.getElementById('productName'); // Input for product name
-const ProductPriceInput = document.getElementById('productPrice'); // Input for product price
-const productImageUrl = document.getElementById('productImageUrl'); // Input for product image URL
+const ProductNameInput = document.getElementById('productName'); // Input field for product name
+const ProductPriceInput = document.getElementById('productPrice'); // Input field for product price
+const productImageUrl = document.getElementById('productImageUrl'); // Input field for product image URL
 const ProductCategoryInput = document.getElementById('productCategory'); // Dropdown for product category
-const tableBody = document.querySelector('tbody'); // Table body to render products
-const submitButton = document.querySelector('form button[type="submit"]'); // Submit button
-const saveCategoryBtn = document.getElementById('saveCategoryBtn'); // Button inside modal to save category
-const newCategoryInput = document.getElementById('newCategory'); // Input field for new category
+const tableBody = document.querySelector('tbody'); // Table body where products will be rendered
+const submitButton = document.querySelector('form button[type="submit"]'); // Submit button in the form
+const saveCategoryBtn = document.getElementById('saveCategoryBtn'); // Button inside modal to save new category
+const newCategoryInput = document.getElementById('newCategory'); // Input field for adding a new category
 
-// Flags for edit mode
-let isEdit = false;
-let editIndex = null;
 
-// Load products and categories from localStorage (or empty arrays if none exist)
+// -------------------------------
+// Flags for Edit Mode
+// -------------------------------
+let isEdit = false;   // Tracks whether we are editing an existing product
+let editIndex = null; // Stores the index of the product being edited
+
+
+// -------------------------------
+// Load Data from localStorage
+// -------------------------------
+// If no data exists, initialize with empty arrays
 let products = JSON.parse(localStorage.getItem('products')) || [];
 let categorys = JSON.parse(localStorage.getItem('categorys')) || [];
 
-// Initial render
-renderTable();
-getCategorys();
 
-// ✅ Add a new category
+// -------------------------------
+// Initial Render
+// -------------------------------
+renderTable();   // Render product table on page load
+getCategorys();  // Populate category dropdown on page load
+
+
+// -------------------------------
+// Add a New Category
+// -------------------------------
 function addCategory() {
   const categoryValue = newCategoryInput.value.trim();
 
   if (categoryValue && !categorys.includes(categoryValue)) {
-    // Add category to array and save to localStorage
+    // Add category to array and persist in localStorage
     categorys.push(categoryValue);
     localStorage.setItem('categorys', JSON.stringify(categorys));
+
+    // Refresh category dropdown
     getCategorys();
-    newCategoryInput.value = ''; // Clear input field
+
+    // Clear input field
+    newCategoryInput.value = '';
 
     // Close modal after saving
     const modal = bootstrap.Modal.getInstance(document.getElementById('exampleModal'));
     if (modal) modal.hide();
+
   } else if (!categoryValue) {
     alert('Please enter a category name');
   } else {
@@ -42,11 +73,15 @@ function addCategory() {
   }
 }
 
-// ✅ Render categories in the dropdown
+
+// -------------------------------
+// Render Categories in Dropdown
+// -------------------------------
 function getCategorys() {
   const categorySelect = document.getElementById('productCategory');
   categorySelect.innerHTML = '<option value="">Select a category</option>';
 
+  // Add each category as an option
   categorys.forEach(category => {
     const option = document.createElement('option');
     option.value = category;
@@ -55,7 +90,10 @@ function getCategorys() {
   });
 }
 
-// ✅ Add or update a product
+
+// -------------------------------
+// Add or Update a Product
+// -------------------------------
 function addProduct() {
   const productData = {
     name: ProductNameInput.value,
@@ -70,7 +108,7 @@ function addProduct() {
     isEdit = false;
     editIndex = null;
 
-    // Reset button state
+    // Reset button state back to "Add Product"
     submitButton.textContent = 'Add Product';
     submitButton.classList.remove('btn-warning');
     submitButton.classList.add('btn-primary');
@@ -79,14 +117,20 @@ function addProduct() {
     products.push(productData);
   }
 
-  // Save products to localStorage
+  // Save updated products list to localStorage
   localStorage.setItem('products', JSON.stringify(products));
 
+  // Refresh product table
   renderTable();
-  form.reset(); // Clear form
+
+  // Clear form inputs
+  form.reset();
 }
 
-// ✅ Render product table
+
+// -------------------------------
+// Render Product Table
+// -------------------------------
 function renderTable() {
   let productsNumber = products.length;
   let productNumberSection = document.querySelector('.product-count');
@@ -95,7 +139,7 @@ function renderTable() {
   productNumberSection.innerHTML = `<h5>Product Number: ${productsNumber}</h5>`;
   tableBody.innerHTML = '';
 
-  // Create table rows for each product
+  // Create table rows dynamically
   products.forEach((product, index) => {
     const row = document.createElement('tr');
     row.innerHTML = `
@@ -112,24 +156,33 @@ function renderTable() {
   });
 }
 
-// ✅ Delete a product
+
+// -------------------------------
+// Delete a Product
+// -------------------------------
 function deleteProduct(index) {
   if (confirm('Are you sure you want to delete this product?')) {
-    products.splice(index, 1);
-    localStorage.setItem('products', JSON.stringify(products));
-    renderTable();
+    products.splice(index, 1); // Remove product at given index
+    localStorage.setItem('products', JSON.stringify(products)); // Update localStorage
+    renderTable(); // Refresh table
   }
 }
 
-// ✅ Edit a product
+
+// -------------------------------
+// Edit a Product
+// -------------------------------
 function editProduct(index) {
+  // Change button to "Update Product"
   submitButton.textContent = 'Update Product';
   submitButton.classList.remove('btn-primary');
   submitButton.classList.add('btn-warning');
 
+  // Enable edit mode
   isEdit = true;
   editIndex = index;
 
+  // Load product data into form fields
   const product = products[index];
   ProductNameInput.value = product.name;
   ProductPriceInput.value = product.price;
@@ -140,10 +193,13 @@ function editProduct(index) {
   form.scrollIntoView({ behavior: 'smooth' });
 }
 
-// ✅ Event listeners
+
+// -------------------------------
+// Event Listeners
+// -------------------------------
 form.addEventListener('submit', function (event) {
-  event.preventDefault();
-  addProduct();
+  event.preventDefault(); // Prevent page reload
+  addProduct();           // Add or update product
 });
 
-saveCategoryBtn.addEventListener('click', addCategory);
+saveCategoryBtn.addEventListener('click', addCategory); // Save new category
